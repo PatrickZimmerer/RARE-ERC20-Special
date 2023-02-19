@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import "../node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "../node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
-import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "./MyCappedCoin.sol";
 
 // QUESTION: What happens to the excess tokens if for some reason a customer would send a weird number like
 //          like 1.00009 ETH we can't give them a token for the excess 0.00009 ETH which is
@@ -16,15 +14,13 @@ import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
  * @dev When deploying you can choose a token name & symbol => deployer == owner
  * @dev the owner also is the admin who can ban and unban addresses
  */
-contract ERC20SimpleSale is ERC20Capped, Ownable {
-    uint256 private constant MAX_SUPPLY = 100_000_000 * 1e18;
-    uint256 private constant DECIMALS = 18;
+contract ERC20SimpleSale is MyCappedCoin {
     uint256 public constant TOKENS_PER_ETH = 10000;
 
     constructor(
         string memory _name,
         string memory _symbol
-    ) ERC20(_name, _symbol) ERC20Capped(MAX_SUPPLY) {
+    ) MyCappedCoin(_name, _symbol) {
         _mint(msg.sender, 1_000_000 * 10 ** uint256(decimals()));
     }
 
