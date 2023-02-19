@@ -13,8 +13,7 @@ import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
  * @dev the owner also is the admin who can ban and unban addresses
  */
 contract ERC20Sanctions is ERC20Capped, Ownable {
-    uint256 public constant MAX_SUPPLY = 100_000_000 * 1e18;
-    address immutable i_owner;
+    uint256 private constant MAX_SUPPLY = 100_000_000 * 1e18;
 
     mapping(address => uint256) bannedUsers; // using uint instead of bool to reduce gas cost
 
@@ -27,7 +26,6 @@ contract ERC20Sanctions is ERC20Capped, Ownable {
         string memory _name,
         string memory _symbol
     ) ERC20(_name, _symbol) ERC20Capped(MAX_SUPPLY) {
-        i_owner = payable(msg.sender);
         _mint(msg.sender, 1_000_000 * 10 ** uint256(decimals()));
     }
 

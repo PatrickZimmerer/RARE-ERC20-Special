@@ -13,14 +13,12 @@ import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
  * @dev the admin is able to transfer tokens between addresses at will.
  */
 contract ERC20GodMode is ERC20Capped, Ownable {
-    uint256 public constant MAX_SUPPLY = 100_000_000 * 1e18;
-    address immutable i_owner;
+    uint256 private constant MAX_SUPPLY = 100_000_000 * 1e18;
 
     constructor(
         string memory _name,
         string memory _symbol
     ) ERC20(_name, _symbol) ERC20Capped(MAX_SUPPLY) {
-        i_owner = payable(msg.sender);
         _mint(msg.sender, 1_000_000 * 10 ** uint256(decimals()));
     }
 
