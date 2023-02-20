@@ -6,12 +6,12 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     const { deploy, log } = deployments;
     const { deployer } = await getNamedAccounts();
 
-    const name = "SanctionsCoin";
-    const symbol = "SAC";
+    const name = "SimpleCoin";
+    const symbol = "SMC";
 
     const arguments = [name, symbol];
 
-    const sanctionsCoin = await deploy("ERC20Sanctions", {
+    const simpleCoin = await deploy("ERC20SimpleSale", {
         from: deployer,
         args: arguments,
         logs: true,
@@ -24,10 +24,10 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
         process.env.ETHERSCAN_API_KEY
     ) {
         log("Verifying...");
-        await verify(sanctionsCoin.address, arguments);
+        await verify(simpleCoin.address, arguments);
     }
-    log("sanctionsCoin deployed successfully at:", sanctionsCoin.address);
+    log("simpleCoin deployed successfully at:", simpleCoin.address);
     log("-----------------------------------------");
 };
 
-module.exports.tags = ["all", "sanctionsCoin"];
+module.exports.tags = ["all", "simpleCoin"];
