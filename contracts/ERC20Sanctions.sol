@@ -13,6 +13,9 @@ import "./MyCappedCoin.sol";
 contract ERC20Sanctions is MyCappedCoin {
     mapping(address => uint256) bannedUsers; // using uint instead of bool to reduce gas cost
 
+    /**
+     * @notice Custom Modifier to check if a user is banned
+     */
     modifier onlyUnbanned() {
         require(bannedUsers[msg.sender] != 1, "You are banned");
         _;

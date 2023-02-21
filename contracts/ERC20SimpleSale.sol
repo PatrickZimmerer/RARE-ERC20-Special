@@ -15,7 +15,7 @@ import "./MyCappedCoin.sol";
 // ANSWER:
 
 /**
- * @title A contract for a basic ERC20 coin where specific users can be banned from using it
+ * @title A contract for a basic ERC20 coin where you can buy tokens at a fixed price
  * @author Patrick Zimmerer
  * @notice This contract is to demo a sample ERC20 token with sanctions
  * @dev When deploying you can choose a token name & symbol => deployer == owner
@@ -31,10 +31,12 @@ contract ERC20SimpleSale is MyCappedCoin {
         _mint(msg.sender, 1_000_000 * 10 ** uint256(decimals()));
     }
 
+    /**
+     * @notice This function just gives back the amount of Tokens you would get for sending X ETH
+     */
     function buyTokens() external payable {
         require(msg.value > 0, "Send some ETH to buy tokens");
-        uint256 amount = (msg.value / 10 ** 18) * 10 ** 18; // remove excess which is insufficient for a token
-        _mint(msg.sender, amount * TOKENS_PER_ETH);
-        // can we return the excess ether somehow?
+        uint256 amount = (msg.value / 10 ** 18) * 10 ** 18; // remove excess which is insufficient for a token like 0.00009 ETH since
+        _mint(msg.sender, amount * TOKENS_PER_ETH); // 1 token is 0.0001 ETH => can we return the excess ether somehow?
     }
 }

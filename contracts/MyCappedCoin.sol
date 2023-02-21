@@ -8,7 +8,7 @@ import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 /// @title A contract for a basic ERC20 coin which is capped at 100 million token
 /// @author Patrick Zimmerer
 /// @notice This contract is to demo a sample ERC20 capped contract
-/// @dev When deploying you can choose a token name & symbol => deployer == owner
+/// @dev When deploying you can choose a token name & symbol
 abstract contract MyCappedCoin is ERC20Capped, Ownable {
     uint256 private constant MAX_SUPPLY = 100_000_000 * 1e18;
     uint256 private constant DECIMALS = 18;
