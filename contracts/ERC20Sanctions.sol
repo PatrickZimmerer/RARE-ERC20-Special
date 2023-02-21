@@ -44,7 +44,7 @@ contract ERC20Sanctions is MyCappedCoin {
     /**
      * @notice Checks if one of the addresses is banned by the admin
      * @dev Hook that is called before any transfer of tokens. This includes
-     * minting and burning.
+     * minting as well as burning.
      */
     function _beforeTokenTransfer(
         address from,
@@ -63,10 +63,7 @@ contract ERC20Sanctions is MyCappedCoin {
     }
 
     /**
-     * @notice Only admin can ban/unban users from using the contract
-     * @dev If you want to ban a User pass in the number 1 if you want to unban the user
-     * @dev it is recommended to pass in a number > 1 like 2 since setting
-     * @dev a non-zero to a non-zero value costs only 5000 gas instead of 20_000gas
+     * @notice Just shows if a specific address is banned from using the token
      */
     function showBannedStatus(
         address _address
