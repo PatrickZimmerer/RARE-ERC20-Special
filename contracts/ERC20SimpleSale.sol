@@ -3,9 +3,16 @@ pragma solidity 0.8.17;
 
 import "./MyCappedCoin.sol";
 
+// QUESTION: I always see people using Solidity 0.8.7 so what is the recommended version to use when creating a new contract?
+// ANSWER:
+
+// QUESTION: About floating pragma: When should I use a version like ^0.8.0 just when building a library or smth like that?
+// ANSWER:
+
 // QUESTION: What happens to the excess tokens if for some reason a customer would send a weird number like
 //          like 1.00009 ETH we can't give them a token for the excess 0.00009 ETH which is
 //          why we remove that in the buyToken => amount variable
+// ANSWER:
 
 /**
  * @title A contract for a basic ERC20 coin where specific users can be banned from using it
