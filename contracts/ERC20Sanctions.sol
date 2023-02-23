@@ -11,7 +11,7 @@ import "./MyCappedCoin.sol";
  * @dev the owner also is the admin who can ban and unban addresses
  */
 contract ERC20Sanctions is MyCappedCoin {
-    mapping(address => uint256) bannedUsers; // using uint instead of bool to reduce gas cost
+    mapping(address => uint256) public bannedUsers; // using uint instead of bool to reduce gas cost
 
     /**
      * @notice Custom Modifier to check if a user is banned
@@ -26,6 +26,16 @@ contract ERC20Sanctions is MyCappedCoin {
         string memory _symbol
     ) MyCappedCoin(_name, _symbol) {
         _mint(msg.sender, 1_000_000 * 10 ** uint256(decimals()));
+    }
+
+    /**
+     * @notice needs to be overwritten
+     */
+    function _mint(
+        address account,
+        uint256 amount
+    ) internal virtual override onlyUnbanned {
+        super._mint(account, amount);
     }
 
     /**

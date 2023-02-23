@@ -4,7 +4,7 @@ pragma solidity 0.8.17;
 import "./MyCappedCoin.sol";
 
 // QUESTION: I always see people using Solidity 0.8.7 so what is the recommended version to use when creating a new contract?
-// ANSWER:
+// ANSWER: Generally latest version, look at release notes for bug fix / improvements for compiler efficiency => maybe look out for bugs wait a few days/weeks
 
 // QUESTION: About floating pragma: When should I use a version like ^0.8.0 just when building a library or smth like that?
 // ANSWER:
