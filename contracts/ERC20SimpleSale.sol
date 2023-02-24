@@ -7,12 +7,12 @@ import "./MyCappedCoin.sol";
 // ANSWER: Generally latest version, look at release notes for bug fix / improvements for compiler efficiency => maybe look out for bugs wait a few days/weeks
 
 // QUESTION: About floating pragma: When should I use a version like ^0.8.0 just when building a library or smth like that?
-// ANSWER:
+// ANSWER: if you deploy / compile chose a fixed version just if you build a library where you don't know what version is going to be used
 
 // QUESTION: What happens to the excess tokens if for some reason a customer would send a weird number like
 //          like 1.00009 ETH we can't give them a token for the excess 0.00009 ETH which is
 //          why we remove that in the buyToken => amount variable
-// ANSWER:
+// ANSWER: Could be refunded if it's even worth it
 
 /**
  * @title A contract for a basic ERC20 coin where you can buy tokens at a fixed price
