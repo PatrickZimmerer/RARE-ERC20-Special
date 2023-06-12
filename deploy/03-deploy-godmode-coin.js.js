@@ -1,21 +1,20 @@
-const { network } = require("hardhat");
+const { network, ethers, upgrades } = require("hardhat");
 const { developmentChains } = require("../helper-hardhat-config");
 const { verify } = require("../utils/verify");
+const { BigNumber } = require("ethers");
 
-module.exports = async function ({ getNamedAccounts, deployments }) {
-    const { deploy, log } = deployments;
-    const { deployer } = await getNamedAccounts();
+module.exports = async function ({ deployments }) {
+    const { log } = deployments;
 
     const name = "GodModeCoin";
     const symbol = "GMC";
+    const cap = BigNumber.from(1000000000000);
 
-    const arguments = [name, symbol];
+    const arguments = [name, symbol, cap];
 
-    const godModeCoin = await deploy("ERC20GodMode", {
-        from: deployer,
-        args: arguments,
-        logs: true,
-        waitConfirmations: network.config.blockConfirmations || 1,
+    const GodModeCoin = await ethers.getContractFactory("ERC20GodMode");
+    const godModeCoin = await upgrades.deployProxy(GodModeCoin, arguments, {
+        initializer: "initialize",
     });
 
     // only verify the code when not on development chains as hardhat
@@ -23,10 +22,13 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
         !developmentChains.includes(network.name) &&
         process.env.ETHERSCAN_API_KEY
     ) {
-        log("Verifying...");
+        log("Verifying UPGRADEABLE contract...");
         await verify(godModeCoin.address, arguments);
     }
-    log("godModeCoin deployed successfully at:", godModeCoin.address);
+    log(
+        "UPGRADEABLE contract godModeCoin deployed successfully at:",
+        godModeCoin.address
+    );
     log("-----------------------------------------");
 };
 
